@@ -79,6 +79,14 @@ public class FastScrollRecyclerView extends RecyclerView implements RecyclerView
         return mScrollbar.getThumbHeight();
     }
 
+    public void setFastScrollEnabled(boolean enabled) {
+        mScrollbar.setEnabled(enabled);
+    }
+
+    public boolean isFastScrollEnabled() {
+        return mScrollbar.isEnabled();
+    }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();

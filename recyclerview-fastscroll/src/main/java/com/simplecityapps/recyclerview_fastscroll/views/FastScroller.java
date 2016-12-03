@@ -43,6 +43,7 @@ public class FastScroller {
     private static final int DEFAULT_AUTO_HIDE_DELAY = 1500;
 
     private FastScrollRecyclerView mRecyclerView;
+    private boolean mIsEnabled = true;
     private FastScrollPopup mPopup;
 
     private int mThumbHeight;
@@ -151,6 +152,15 @@ public class FastScroller {
         return mIsDragging;
     }
 
+    public void setEnabled(boolean enabled) {
+        mIsEnabled = enabled;
+        mIsDragging = enabled && mIsDragging;
+    }
+
+    public boolean isEnabled() {
+        return mIsEnabled;
+    }
+
     /**
      * Handles the touch event and determines whether to show the fast scroller (or updates it if
      * it is already showing).
@@ -158,6 +168,7 @@ public class FastScroller {
     public void handleTouchEvent(MotionEvent ev, int downX, int downY, int lastY,
                                  OnFastScrollStateChangeListener stateChangeListener) {
         ViewConfiguration config = ViewConfiguration.get(mRecyclerView.getContext());
+        if(!mIsEnabled) return;
 
         int action = ev.getAction();
         int y = (int) ev.getY();
