@@ -57,13 +57,13 @@ Or programmatically via `setThumbColor(@ColorInt int color)`, `setTrackColor(@Co
 
 You can enable or disable fast scrolling or the scrollbar entirely 
 
-''' Java
+``` Java
 
     fastScrollRecyclerView.setScrollBarEnabled(enabled);
     
     fastScrollRecyclerView.setFastScrollEnabled(enabled);
     
-'''
+```
 
 ###Updates###
 v1.0.6
