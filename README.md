@@ -55,6 +55,16 @@ The popup background, popup text, popupbackground size, popup text size, track b
                   ...
 Or programmatically via `setThumbColor(@ColorInt int color)`, `setTrackColor(@ColorInt int color)`, `setPopupBgColor(@ColorInt int color)`, `setPopupTextColor(@ColorInt int color)`& `setPopupTextSize(int size)`
 
+You can enable or disable fast scrolling or the scrollbar entirely 
+
+''' Java
+
+    fastScrollRecyclerView.setScrollBarEnabled(enabled);
+    
+    fastScrollRecyclerView.setFastScrollEnabled(enabled);
+    
+'''
+
 ###Updates###
 v1.0.6
 - The `FastScrollPopup` no longer requires your adapter to implement `SectionIndexer`, but rather `FastScrollRecyclerView.SectionedAdapter`, which is much easier to use.
@@ -75,6 +85,10 @@ v1.0.9
 1.0.11
 
 - Added FastScrollStateChanged listener. Notifies when scrolling starts & stops.
+
+1.0.12
+
+- Added the ability to disable fast scrolling and/or the scrollbar
 
 ###Licenses###
 

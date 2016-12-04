@@ -77,7 +77,7 @@ public class FastScroller {
 
     public FastScroller(Context context, FastScrollRecyclerView recyclerView, AttributeSet attrs) {
 
-        Resources resources = context.getResources();
+        final Resources resources = context.getResources();
 
         mRecyclerView = recyclerView;
         mPopup = new FastScrollPopup(resources, recyclerView);
@@ -90,18 +90,18 @@ public class FastScroller {
         mThumb = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTrack = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(
+        final TypedArray typedArray = context.getTheme().obtainStyledAttributes(
                 attrs, R.styleable.FastScrollRecyclerView, 0, 0);
         try {
             mAutoHideEnabled = typedArray.getBoolean(R.styleable.FastScrollRecyclerView_fastScrollAutoHide, true);
             mAutoHideDelay = typedArray.getInteger(R.styleable.FastScrollRecyclerView_fastScrollAutoHideDelay, DEFAULT_AUTO_HIDE_DELAY);
 
-            int trackColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollTrackColor, 0x1f000000);
-            int thumbColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollThumbColor, 0xff000000);
-            int popupBgColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollPopupBgColor, 0xff000000);
-            int popupTextColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollPopupTextColor, 0xffffffff);
-            int popupTextSize = typedArray.getDimensionPixelSize(R.styleable.FastScrollRecyclerView_fastScrollPopupTextSize, Utils.toScreenPixels(resources, 56));
-            int popupBackgroundSize = typedArray.getDimensionPixelSize(R.styleable.FastScrollRecyclerView_fastScrollPopupBackgroundSize, Utils.toPixels(resources, 88));
+            final int trackColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollTrackColor, 0x1f000000);
+            final int thumbColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollThumbColor, 0xff000000);
+            final int popupBgColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollPopupBgColor, 0xff000000);
+            final int popupTextColor = typedArray.getColor(R.styleable.FastScrollRecyclerView_fastScrollPopupTextColor, 0xffffffff);
+            final int popupTextSize = typedArray.getDimensionPixelSize(R.styleable.FastScrollRecyclerView_fastScrollPopupTextSize, Utils.toScreenPixels(resources, 56));
+            final int popupBackgroundSize = typedArray.getDimensionPixelSize(R.styleable.FastScrollRecyclerView_fastScrollPopupBackgroundSize, Utils.toPixels(resources, 88));
 
             mTrack.setColor(trackColor);
             mThumb.setColor(thumbColor);
@@ -155,12 +155,12 @@ public class FastScroller {
         return mIsDragging;
     }
 
-    public void setSeekEnabled(boolean enabled) {
+    public void setFastScrollEnabled(boolean enabled) {
         mIsSeekEnabled = enabled;
         mIsDragging = enabled && mIsDragging;
     }
 
-    public boolean isSeekEnabled() {
+    public boolean isFastScrollEnabled() {
         return mIsSeekEnabled;
     }
 
@@ -181,11 +181,11 @@ public class FastScroller {
      */
     public void handleTouchEvent(MotionEvent ev, int downX, int downY, int lastY,
                                  OnFastScrollStateChangeListener stateChangeListener) {
-        ViewConfiguration config = ViewConfiguration.get(mRecyclerView.getContext());
+        final ViewConfiguration config = ViewConfiguration.get(mRecyclerView.getContext());
         if(!mIsSeekEnabled) return;
 
-        int action = ev.getAction();
-        int y = (int) ev.getY();
+        final int action = ev.getAction();
+        final int y = (int) ev.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 if (isNearPoint(downX, downY)) {
@@ -206,10 +206,10 @@ public class FastScroller {
                 }
                 if (mIsDragging) {
                     // Update the fastscroller section name at this touch position
-                    int top = 0;
-                    int bottom = mRecyclerView.getHeight() - mThumbHeight;
-                    float boundedY = (float) Math.max(top, Math.min(bottom, y - mTouchOffset));
-                    String sectionName = mRecyclerView.scrollToPositionAtProgress((boundedY - top) / (bottom - top));
+                    final int top = 0;
+                    final int bottom = mRecyclerView.getHeight() - mThumbHeight;
+                    final float boundedY = (float) Math.max(top, Math.min(bottom, y - mTouchOffset));
+                    final String sectionName = mRecyclerView.scrollToPositionAtProgress((boundedY - top) / (bottom - top));
                     mPopup.setSectionName(sectionName);
                     mPopup.animateVisibility(!sectionName.isEmpty());
                     mRecyclerView.invalidate(mPopup.updateFastScrollerBounds(mRecyclerView, mThumbPosition.y));

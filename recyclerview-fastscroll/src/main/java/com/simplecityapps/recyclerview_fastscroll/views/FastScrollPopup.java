@@ -126,7 +126,7 @@ public class FastScrollPopup {
     public void draw(Canvas canvas) {
         if (isVisible()) {
             // Draw the fast scroller popup
-            int restoreCount = canvas.save(Canvas.MATRIX_SAVE_FLAG);
+            final int restoreCount = canvas.save(Canvas.MATRIX_SAVE_FLAG);
             canvas.translate(mBgBounds.left, mBgBounds.top);
             mTmpRect.set(mBgBounds);
             mTmpRect.offsetTo(0, 0);
@@ -134,12 +134,11 @@ public class FastScrollPopup {
             mBackgroundPath.reset();
             mBackgroundRect.set(mTmpRect);
 
-            float[] radii;
+            final float[] radii;
 
             if (Utils.isRtl(mRes)) {
                 radii = new float[]{mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, 0, 0};
             } else {
-
                 radii = new float[]{mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, 0, 0, mCornerRadius, mCornerRadius};
             }
 
@@ -174,10 +173,10 @@ public class FastScrollPopup {
 
         if (isVisible()) {
             // Calculate the dimensions and position of the fast scroller popup
-            int edgePadding = recyclerView.getScrollBarWidth();
-            int bgPadding = (mBackgroundSize - mTextBounds.height()) / 2;
-            int bgHeight = mBackgroundSize;
-            int bgWidth = Math.max(mBackgroundSize, mTextBounds.width() + (2 * bgPadding));
+            final int edgePadding = recyclerView.getScrollBarWidth();
+            final int bgPadding = (mBackgroundSize - mTextBounds.height()) / 2;
+            final int bgHeight = mBackgroundSize;
+            final int bgWidth = Math.max(mBackgroundSize, mTextBounds.width() + (2 * bgPadding));
             if (Utils.isRtl(mRes)) {
                 mBgBounds.left = (2 * recyclerView.getScrollBarWidth());
                 mBgBounds.right = mBgBounds.left + bgWidth;
